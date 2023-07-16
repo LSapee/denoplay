@@ -1,4 +1,4 @@
-import {Router,send} from 'https://deno.land/x/oak/mod.ts'
+import {Router} from 'https://deno.land/x/oak/mod.ts'
 const router = new Router();
 
 interface Myboard {
@@ -11,7 +11,7 @@ const kv:Deno.Kv = await Deno.openKv();
 // await kv.set(key,{title:"감자",post:"감자1"});
 
 router
-    .get("/board",async (ctx)=>{
+    .get("/board",async (ctx):Promise<void> =>{
         const dataList = [];
         const result  = await kv.list({prefix:["boards"]});
         for await (const a of result){
@@ -20,7 +20,7 @@ router
         ctx.response.body = dataList;
     });
 router
-    .post("/board",async (ctx)=>{
+    .post("/board",async (ctx):Promise<void> =>{
 
         const {value} = await ctx.request.body({type:"json"});
         const {title,post} = await value;

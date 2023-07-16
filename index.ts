@@ -5,8 +5,6 @@ import BoardRouter from "./routes/BoardRouter.ts";
 const app = new Application();
 
 
-
-
 app.use(BoardRouter.routes());
 // app.use(UserRouter.allowedMethods());
 
