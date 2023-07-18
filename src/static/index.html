@@ -13,12 +13,27 @@
         for(let i=0 ;i<data.length; i++){
             const temp = document.createElement('div');
             temp.innerHTML = `<li>
-                        <p>글 제목: ${data[i].title}</p>
-                        <p>글 내용: ${data[i].post}</p>
+                        <a href="http://localhost:3000/api/board/${data[i].uuid}">글 제목: ${data[i].title}</a>
+                        <button onclick="deleteButton('${data[i].uuid}')">삭제</button>
                         </li>`;
             myBoard.append(temp);
         }
     })
+
+    function deleteButton(uuid){
+        console.log(1234);
+        console.log(uuid)
+        fetch(`/api/board/${uuid}`,{
+            method:"DELETE",
+            headers:{'Content-Type':'application/json'},
+        })
+            .then((res)=>res.json())
+            .then((data)=>{
+                alert(data.data);
+                location.reload();
+            });
+    }
+
 </script>
 <body>
     <div>

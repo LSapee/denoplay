@@ -19,7 +19,7 @@
         })
             .then((res)=>res.json())
             .then((data)=>{
-                alert(data);
+                alert(data.data);
                 location.href="/";
             })
             .catch(error=> console.log("error",error));
